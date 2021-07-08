@@ -1,16 +1,16 @@
 # Voyant Power DAC Array
 
-Provides an array of digitally controllable power supplies that can each provide up to 10V at 1A with 12 bits of resolution.
+Provides an array of digitally controllable power supplies that can each source up to 10V at 1A with 12 bits of resolution.
 
 ## Theory of operation
 
-We use a stack of Visgence Power DAC shields and an Arduino Uno as our base. 
+We use a stack of [Visgence Power DAC shield](https://www.visgence.com/hardware/powerdacshield/)s and an Arduino Uno as our base. 
 
 Stock these shields are bi-polar and can run -15V to +15. They also only have 4 chip select lines.  
 
 We modify the shields to make them single ended and able to go up to 30V and also add more chip select lines so we can have more connected to a single Arduino at the same time.
 
-Then we load some software on the Arduino that accepts simple command over the serial port to set the output voltages of the shields.
+Then we load some software on the Arduino that accepts simple commands over the serial port to set the output voltages of the shields.
 
 ## DAC shield modifications
 
@@ -34,5 +34,3 @@ Basically we are...
 3. Add a jumper between U2 pin 7 and pin 6 on the bottom side of the PCB
 4. Short out R5 and R6 with jumpers or 0 ohm resistors
 
-   
-    
