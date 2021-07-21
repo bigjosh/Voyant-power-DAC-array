@@ -30,7 +30,7 @@ The power supply should be connected as close as possible to the boards that wil
 
 All commands are ASCII text terminated with either `CR` or `NL` or both.
 
-All commands will generate a response line that begins with the response code followed by human readable response text. 
+All commands will generate a response line that begins with the response code followed by human readable response text. While command responses can be helpful for debugging, the protocol is designed to allow blind sending and even blind coping of a text file of a command sequence.  
 
 ### Set Voltage Command
 
@@ -69,6 +69,19 @@ Delays the specified number of milliseconds.
 
 Example:
 `D1000` would delay the processing of the next command for 1 second. 
+
+### Response codes
+
+Each command received over the serial connection generates a response line. The first char of the line is the code.  
+
+| Code | Mnemonic | Meaning |
+| - | - | - |  
+| '0' | `SUCCESS` | The command was interpreted successfully 
+| '1' | `ERR_SHORT` | The command line was too short (missing required fields) 
+| '2' | `ERR_TAG` | The command specified a board tag not listed in the `powerboards` structure
+| '3' | `ERR_CMD` | An unknown command code was specified
+  
+
 
 ## Calibration
 
