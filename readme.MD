@@ -1,6 +1,8 @@
 # Voyant Power DAC Array
 
-Provides an array of digitally controllable power supplies that can each source 0V-10V at 100mA with +/-20mV accuracy. 
+Provides an array of digitally controllable power supplies that can each source 0V-10V at 0-100mA with +/-20mV accuracy. 
+
+![headshot](img/headshot.jpg)
 
 ## Theory of operation
 
@@ -28,7 +30,7 @@ The power supply should be connected as close as possible to the boards that wil
 
 All commands are ASCII text terminated with either `CR` or `NL` or both.
 
-All command will generate a response line that begins with the response code followed by human readable response text. 
+All commands will generate a response line that begins with the response code followed by human readable response text. 
 
 ### Set Voltage Command
 
@@ -88,10 +90,10 @@ The stock DAC shield schematic is [here](dac_shield.pdf).
 
 We make the following changes...
 
-1. We connect the `-` and `+` input voltages to pins `A0` and `A1` respectively. This just saves us form having to connect the supplies to every boar individually.
-2. We create a "bottom" blank shield that does nothing except block the `A0` and `A1` lines from getting down to the Arduino.   
-2. We move the feedback tap for the final opamp to the other side of the fuse. This corrects a design flaw that otherwise would cause the output voltage to sag as output current increased due to the series resistance of the fuse. Optionally, that feedback tap could be moved all the way to the load for more accuracy at higher currents (this essentially creates a Kelvin sensor line).  
-3. We add additional chip select lines to jumper #4 so we can have more than 4 boards in a single stack.   
+1. We connect the `-` and `+` input voltages to pins `A0` and `A1` respectively. This just saves us from having to connect the supplies to every board individually. [Back side](img/power-jumpers.jpg). 
+2. We create a "bottom" blank shield that does nothing except block the `A0` and `A1` lines from getting down to the Arduino.
+2. We move the feedback tap for the final opamp to the other side of the fuse ([schematic](img/Feedback-line-mod-sch.png)). This corrects a design flaw that otherwise would cause the output voltage to sag as output current increased due to the series resistance of the fuse. Optionally, that feedback tap could be moved all the way to the load for more accuracy at higher currents (this essentially creates a Kelvin sensor line). ([cut trace](img/cut-trace.png) and [resistor tap](feedback-front.png)) 
+3. We add additional chip select lines to jumper #4 so we can have more than 4 boards in a single stack. 
 
 ![move the feedback tap](feedback-line-mod.png)
 
@@ -108,6 +110,8 @@ Basically we are...
 1. Changing the DAC to use the Arduino 5V as VREF. This will let it go full scale and give us maximum resolution. We could even use a more precise voltage reference here. 
 2. Moving the output of the DAC to feed directly into the positive 2nd stage of the output amp.
 3. Changing that 2nd stage output amp into a variable gain amplifier with 2x gain in the center of the adjustment POT. 
+
+We can also get rid of the fiddlelyness of the trim pot by surrounding it with 50K or higher resistors. This would reduce the adjustment range and increase the amount of rotation per voltage change.   
 
 ## Shield rework steps
 
