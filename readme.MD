@@ -108,7 +108,7 @@ We make the following changes...
 2. We move the feedback tap for the final opamp to the other side of the fuse ([schematic](img/Feedback-line-mod-sch.png)). This corrects a design flaw that otherwise would cause the output voltage to sag as output current increased due to the series resistance of the fuse. Optionally, that feedback tap could be moved all the way to the load for more accuracy at higher currents (this essentially creates a Kelvin sensor line). ([cut trace](img/cut-trace.png) and [resistor tap](feedback-front.png)) 
 3. We add additional chip select lines to jumper #4 so we can have more than 4 boards in a single stack. 
 
-![move the feedback tap](feedback-line-mod.png)
+![move the feedback tap](img/Feedback-line-mod-sch.png)
 
 ### Even more precision and accuracy
 
@@ -116,7 +116,7 @@ We can double the usable precision by making the output single ended, and we can
 
 We can do this with the following changes...
 
-![](dac_shield_schematic_modified.png)
+![](img/dac_shield_schematic_modified.png)
 
 Basically we are...
 
